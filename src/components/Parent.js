@@ -10,8 +10,8 @@ function Parent() {
     const [itemName,setItemName]=useState('')
     const [itemPrice,setItemPrice]=useState('')
 
-    function handleSubmit(event){
-        event.preventDefault();
+    function handleSubmit(){
+        // event.preventDefault();
 
         if (!itemName || !itemPrice) {
             return; // Prevent adding empty items
@@ -31,21 +31,21 @@ function Parent() {
     };
 
     //for Deleting
-    const handleDelete=(itemsId)=>{
+    const handleDelete=(itemId)=>{
         setCartItems((prevCartItems)=>
-        prevCartItems.filter((item)=>itemsId!==item.id)
+        prevCartItems.filter((item)=>itemId!==item.id)
         )
     };
 
   return (
     <div className='parent'>
       <h1>Parent Component</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e)=>e.preventDefault()}>
         <label htmlFor="Item Name">Item Name:</label>
         <input id='itemName' type="text" value={itemName} onChange={(e)=>setItemName(e.target.value)}/>
         <label htmlFor="Item Price">Item Price:</label>
         <input id='itemPrice' type="number" value={itemPrice} onChange={(e)=>setItemPrice(e.target.value)} />
-        <button type='Submit'>Add Item</button>
+        <button type='Submit'onClick={handleSubmit}>Add Item</button>
       </form>
       <Child cartItems={cartItems} handleDelete={handleDelete}/>
     </div>
