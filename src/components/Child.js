@@ -1,20 +1,19 @@
 import React from "react";
 
-function Child({ cartItems, handleDelete }) {
-  return (
-    <div className="child">
-      <h1>Child Component</h1>
-
-      <ul>
-        {cartItems.map((item) => (
-          <li key={item.id}>
-            {item.Name}-${item.Price}
-            <button onClick={() => handleDelete(item.id)}>Remove</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+function Child({ cartItems, onRemove }) {
+    return (
+        <div className='child'>
+            <h2>Child Component</h2>
+            <ul>
+                {cartItems && cartItems.map((item) => (
+                    <li key={item.id}>
+                        {item.name} - ${item.price} 
+                        <button onClick={() => {onRemove(item.id)}}>Remove</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
 }
 
 export default Child;
