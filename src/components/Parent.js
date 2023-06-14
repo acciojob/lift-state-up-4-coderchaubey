@@ -1,55 +1,67 @@
-import React,{useState} from 'react'
-import Child from './Child'
+import React, { useState } from "react";
+import Child from "./Child";
 
 function Parent() {
-    const [cartItems,setCartItems]=useState([{ id: 1, Name: 'Item 1', Price: 10 },
-    { id: 2, Name: 'Item 2', Price: 20 },
-    { id: 3, Name: 'Item 3', Price: 30 },
-    { id: 4, Name: 'Item 4', Price: 40 }
-])
-    const [itemName,setItemName]=useState('')
-    const [itemPrice,setItemPrice]=useState('')
+  const [cartItems, setCartItems] = useState([
+    { id: 1, Name: "Item 1", Price: 10 },
+    { id: 2, Name: "Item 2", Price: 20 },
+    { id: 3, Name: "Item 3", Price: 30 },
+  ]);
+  const [itemName, setItemName] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
 
-    function handleSubmit(){
-        // event.preventDefault();
+  function handleSubmit() {
+    // event.preventDefault();
 
-        if (!itemName || !itemPrice) {
-            return; // Prevent adding empty items
-          }
-          
-        const items={
-            id: cartItems.length,
-            Name:itemName,
-            Price:itemPrice,
-        };
+    if (!itemName || !itemPrice) {
+      return; // Prevent adding empty items
+    }
 
-        setCartItems([...cartItems,items]);
-
-        //setting itemName and itemPrice to empty
-        setItemName('');
-        setItemPrice('');
+    const items = {
+      id: cartItems.length,
+      Name: itemName,
+      Price: itemPrice,
     };
 
-    //for Deleting
-    const handleDelete=(itemId)=>{
-        setCartItems((prevCartItems)=>
-        prevCartItems.filter((item)=>itemId!==item.id)
-        )
-    };
+    setCartItems([...cartItems, items]);
+
+    //setting itemName and itemPrice to empty
+    setItemName("");
+    setItemPrice("");
+  }
+
+  //for Deleting
+  const handleDelete = (itemId) => {
+    setCartItems((prevCartItems) =>
+      prevCartItems.filter((item) => itemId !== item.id)
+    );
+  };
 
   return (
-    <div className='parent'>
+    <div className="parent">
       <h1>Parent Component</h1>
-      <form onSubmit={(e)=>e.preventDefault()}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="Item Name">Item Name:</label>
-        <input id='itemName' type="text" value={itemName} onChange={(e)=>setItemName(e.target.value)}/>
+        <input
+          id="itemName"
+          type="text"
+          value={itemName}
+          onChange={(e) => setItemName(e.target.value)}
+        />
         <label htmlFor="Item Price">Item Price:</label>
-        <input id='itemPrice' type="number" value={itemPrice} onChange={(e)=>setItemPrice(e.target.value)} />
-        <button type='Submit'onClick={handleSubmit}>Add Item</button>
+        <input
+          id="itemPrice"
+          type="number"
+          value={itemPrice}
+          onChange={(e) => setItemPrice(e.target.value)}
+        />
+        <button type="submit" onClick={()=>handleSubmit()}>
+          Add Item
+        </button>
       </form>
-      <Child cartItems={cartItems} handleDelete={handleDelete}/>
+      <Child cartItems={cartItems} handleDelete={handleDelete} />
     </div>
-  )
+  );
 }
 
-export default Parent
+export default Parent;
