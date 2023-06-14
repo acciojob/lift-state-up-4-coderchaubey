@@ -8,13 +8,13 @@ function Child({cartItems,handleDelete}) {
         <ul>
             {
         cartItems.map((item)=>
-            (<div key='item.id'>
+            (
                 
-                    <li>
-                       <span>{item.Name}-${item.Price}</span> 
+                    <li key='item.id'>
+                       {item.Name}-${item.Price}
                     <button onClick={()=>handleDelete(item.id)}>Remove</button>
                     </li>
-            </div>)
+            )
         )
     }
         </ul>
